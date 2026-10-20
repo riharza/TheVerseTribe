@@ -49,25 +49,3 @@ export function truncate(text: string, length: number): string {
   return text.slice(0, length).trim() + "…";
 }
 
-export const GENRES = [
-  "Fantasy",
-  "Romance",
-  "Mystery",
-  "Horror",
-  "Adventure",
-  "Sci-Fi",
-  "Fanfiction",
-  "Young Adult",
-  "Thriller",
-  "Drama",
-] as const;
-
-export type Genre = (typeof GENRES)[number];
-
-export const BLOG_CATEGORIES = [
-  "Writing Advice",
-  "Author Spotlight",
-  "Reading Recommendations",
-  "Community",
-  "Literary Analysis",
-] as const;

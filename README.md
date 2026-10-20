@@ -74,8 +74,6 @@ Do not run `npm run dev` on the hosting platform; use the production build only.
 | `/about` | About the platform |
 | `/workspace` | Redirects to `/dashboard` |
 
-Legacy storytelling routes under `src/app/story` remain in the repo but are not linked from main navigation.
-
 ---
 
 ## What works today vs. backend
