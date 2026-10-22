@@ -34,7 +34,9 @@ Run **only one** dev server at a time (do not run `npm run build` while `dev` is
 | `npm test` | Unit tests (sample data helpers) |
 | `npm run lint` | ESLint |
 
-Copy [`.env.example`](.env.example) to `.env.local` if you need to override mock API behavior.
+Copy [`.env.example`](.env.example) to `.env.local` if you need to override mock API behavior. **Do not commit `.env.local` or any API keys.**
+
+All demo content lives under `src/lib/data/sample/` — fictional or public bibliographic examples only; no user data is stored in this repository.
 
 ### Pre-deploy check
 
@@ -64,7 +66,7 @@ Do not run `npm run dev` on the hosting platform; use the production build only.
 
 | Route | Description |
 |-------|-------------|
-| `/` | Home — platform intro, features, demo visuals |
+| `/` | Home — forest-themed carousel of research modules |
 | `/dashboard` | Research dashboard (projects, papers, activity) |
 | `/literature` | Library — upload UI, search, filters |
 | `/assistant` | AI assistant — Q&A with sample citations |
@@ -118,6 +120,11 @@ src/
 
 ---
 
+## Public repository notes
+
+- No secrets belong in git — use Vercel/hosting env vars for `NEXT_PUBLIC_*` when you add a real API.
+- PDF upload and assistant responses are **mock/client-only** in this build; nothing is persisted to a server from the demo UI.
+
 ## License
 
-Private project.
+MIT — see [LICENSE](LICENSE).

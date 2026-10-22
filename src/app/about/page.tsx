@@ -22,8 +22,8 @@ export default function AboutPage() {
           — and clearly signals when evidence is insufficient.
         </p>
         <p>
-          The interface uses a midnight navy palette with violet and cyan accents, restrained motion,
-          and dashboard-style visualizations designed for long research sessions.
+          The interface uses a forest-and-earth palette with restrained motion and dashboard-style
+          layouts designed for long research sessions.
         </p>
         <p>
           <Link href="/docs" className="text-accent-cyan hover:underline">

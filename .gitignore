@@ -20,6 +20,7 @@
 
 # misc
 .DS_Store
+Thumbs.db
 *.pem
 
 # debug
@@ -28,14 +29,26 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files
+# env files (never commit secrets)
 .env
-.env*.local
+.env.*
+!.env.example
 
-# vercel
+# hosting / tooling local state
 .vercel
+
+# editor & agent local state
+.cursor/
+.idea/
+.vscode/
+
+# optional local-only dev scripts (not used in production deploy)
+/scripts/
 
 # typescript
 *.tsbuildinfo
 
-# prisma
+# legacy / experimental local modules (keep out of public repo)
+/src/components/science/
+/src/components/guide/
+/src/app/api/
