@@ -10,9 +10,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", size = "md", children, ...props }, ref) => {
     const variants = {
       primary:
-        "bg-gradient-to-r from-accent-violet-deep via-accent-violet to-accent-cyan/90 text-ivory " +
-        "hover:from-accent-violet hover:via-accent-violet-soft hover:to-accent-cyan font-medium " +
-        "shadow-groove border border-white/15 hover:shadow-neon-cyan",
+        "bg-[var(--theme-primary)] text-white font-medium shadow-md border border-[var(--theme-primary-hover)] " +
+        "hover:bg-[var(--theme-primary-hover)] hover:shadow-lg",
       secondary:
         "bg-navy-mid/50 text-ivory hover:bg-navy-light/50 border border-white/12 backdrop-blur-md",
       ghost: "text-ivory-muted hover:text-accent-cyan hover:bg-accent-cyan/5",
@@ -34,7 +33,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           "inline-flex items-center justify-center gap-2 font-sans transition-all duration-300",
           "disabled:opacity-50 disabled:pointer-events-none",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-cyan/60 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-deep",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white",
           "hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]",
           variants[variant],
           sizes[size],

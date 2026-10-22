@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Serif, JetBrains_Mono } from "next/font/google";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { AppBackdrop } from "@/components/atmosphere/AppBackdrop";
 import { AppProviders } from "@/components/providers/AppProviders";
+import { SiteBackground } from "@/components/carousel/SiteBackground";
 import "./globals.css";
 
 const plexSans = IBM_Plex_Sans({
@@ -42,11 +42,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${plexSans.variable} ${plexSerif.variable} ${jetbrains.variable}`}
     >
-      <body className="flex flex-col min-h-screen">
-        <AppBackdrop />
+      <body className="flex min-h-screen flex-col bg-[var(--background)] text-[var(--foreground)]">
         <AppProviders>
+          <SiteBackground />
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="relative z-10 flex-1">{children}</main>
           <Footer />
         </AppProviders>
       </body>

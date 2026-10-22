@@ -78,11 +78,11 @@ export function Navbar() {
 
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
 
-        scrolled || !isHome
-
-          ? "bg-navy-deep/70 backdrop-blur-2xl border-b border-white/10 shadow-groove"
-
-          : "bg-navy-deep/20 backdrop-blur-md border-b border-white/5"
+        isHome
+          ? "border-b border-[var(--theme-border)] bg-[var(--theme-surface)]/85 shadow-sm backdrop-blur-xl"
+          : scrolled
+            ? "border-b border-[var(--theme-border)] bg-[var(--theme-surface)]/95 shadow-sm backdrop-blur-2xl"
+            : "border-b border-[var(--theme-border)] bg-[var(--theme-surface)]/70 backdrop-blur-md"
 
       )}
 
@@ -120,7 +120,9 @@ export function Navbar() {
 
                     "relative px-4 py-2 text-sm font-sans rounded-full transition-colors min-h-[40px] flex items-center",
 
-                    active ? "text-accent-cyan" : "text-ivory-muted hover:text-ivory"
+                    active
+                      ? "font-medium text-[var(--theme-ink)]"
+                      : "text-[var(--theme-body)] hover:text-[var(--theme-ink)]"
 
                   )}
 
@@ -132,7 +134,7 @@ export function Navbar() {
 
                       layoutId="nav-pill"
 
-                      className="absolute inset-0 rounded-full border border-accent-cyan/30 bg-accent-cyan/10"
+                      className="absolute inset-0 rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface-muted)]"
 
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
 
@@ -170,7 +172,7 @@ export function Navbar() {
 
               onClick={() => setMobileOpen(!mobileOpen)}
 
-              className="lg:hidden p-3 min-w-[44px] min-h-[44px] flex items-center justify-center text-ivory-muted hover:text-ivory rounded-full hover:bg-white/5 border border-white/10"
+              className="lg:hidden flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-slate-200 p-3 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
 
               aria-expanded={mobileOpen}
 
@@ -202,7 +204,7 @@ export function Navbar() {
 
             exit={{ opacity: 0, height: 0 }}
 
-            className="lg:hidden border-t border-white/10 bg-navy-deep/95 backdrop-blur-2xl overflow-hidden"
+            className="lg:hidden overflow-hidden border-t border-slate-200 bg-white/95 backdrop-blur-2xl"
 
           >
 
@@ -222,9 +224,9 @@ export function Navbar() {
 
                     (href === "/" ? pathname === "/" : pathname.startsWith(href))
 
-                      ? "text-accent-cyan bg-accent-cyan/10 border border-accent-cyan/25"
+                      ? "border border-slate-200 bg-slate-100 text-slate-900"
 
-                      : "text-ivory-muted hover:text-ivory hover:bg-white/5"
+                      : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
 
                   )}
 

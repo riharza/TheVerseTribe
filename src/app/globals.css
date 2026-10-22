@@ -4,8 +4,17 @@
 
 @layer base {
   :root {
-    --background: #070f1c;
-    --foreground: #eef2f6;
+    --background: #f7f4ef;
+    --foreground: #3d4f47;
+    --theme-ink: #2c3e36;
+    --theme-body: #5c6b63;
+    --theme-muted: #8a9690;
+    --theme-primary: #5b8a72;
+    --theme-primary-hover: #4a7560;
+    --theme-surface: #ffffff;
+    --theme-surface-muted: #efeae3;
+    --theme-border: rgba(91, 138, 114, 0.22);
+    --theme-border-strong: rgba(91, 138, 114, 0.45);
     --gold: #d4af6a;
     --gold-light: #e8c882;
     --ocean: #1e4976;
@@ -14,7 +23,7 @@
     --lavender: #9d8ec7;
     --magic-cyan: #5ec8e8;
     --accent-violet: #8b7ec8;
-    --border: rgba(255, 255, 255, 0.08);
+    --border: rgba(148, 163, 184, 0.35);
     --border-accent: rgba(94, 200, 232, 0.22);
     --border-gold: rgba(139, 126, 200, 0.28);
     --glass-bg: rgba(8, 16, 30, 0.52);
@@ -22,7 +31,7 @@
   }
 
   * {
-    @apply border-[var(--border)];
+    border-color: var(--border);
   }
 
   html {
@@ -41,7 +50,7 @@
   }
 
   body {
-    @apply bg-navy-deep text-ivory font-sans;
+    @apply font-sans text-slate-800;
     background-color: var(--background);
     min-height: 100vh;
   }
@@ -61,6 +70,127 @@
 }
 
 @layer components {
+  .site-backdrop-grid {
+    opacity: 0.45;
+    background-image:
+      linear-gradient(rgba(91, 138, 114, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91, 138, 114, 0.07) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at 50% 40%, black 10%, transparent 75%);
+  }
+
+  .ambient-light-bg {
+    background: linear-gradient(160deg, #f7f4ef 0%, #f3efe8 45%, #eef4f0 100%);
+  }
+
+  .ambient-gradient-shift {
+    background: linear-gradient(
+      120deg,
+      rgba(91, 138, 114, 0.12),
+      rgba(201, 168, 124, 0.1),
+      rgba(155, 142, 196, 0.08),
+      rgba(91, 138, 114, 0.12)
+    );
+    background-size: 240% 240%;
+    animation: ambient-gradient-shift 22s ease-in-out infinite;
+  }
+
+  .site-backdrop-grid-drift {
+    opacity: 0.25;
+    animation: grid-drift 40s linear infinite;
+  }
+
+  .site-backdrop-particles {
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(91, 138, 114, 0.35) 0 1px, transparent 2px),
+      radial-gradient(circle at 85% 15%, rgba(201, 168, 124, 0.4) 0 1px, transparent 2px),
+      radial-gradient(circle at 55% 75%, rgba(155, 142, 196, 0.35) 0 1px, transparent 2px),
+      radial-gradient(circle at 30% 60%, rgba(91, 138, 114, 0.25) 0 1px, transparent 2px);
+    background-size: 220px 220px, 280px 280px, 260px 260px, 300px 300px;
+    animation: particle-drift 48s linear infinite;
+    mask-image: radial-gradient(ellipse at 50% 45%, black 5%, transparent 72%);
+  }
+
+  .site-backdrop-vignette {
+    background: radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(247, 244, 239, 0.55) 100%);
+  }
+
+  .ambient-light-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(60px);
+    opacity: 0.55;
+    animation: ambient-float 18s ease-in-out infinite;
+  }
+
+  .ambient-light-orb-a {
+    width: 55vw;
+    height: 55vw;
+    top: -10%;
+    left: -8%;
+    background: radial-gradient(circle, rgba(91, 138, 114, 0.28), transparent 70%);
+  }
+
+  .ambient-light-orb-b {
+    width: 45vw;
+    height: 45vw;
+    bottom: -5%;
+    right: -10%;
+    background: radial-gradient(circle, rgba(201, 168, 124, 0.25), transparent 70%);
+    animation-delay: -6s;
+  }
+
+  .ambient-light-orb-c {
+    width: 35vw;
+    height: 35vw;
+    top: 35%;
+    right: 20%;
+    background: radial-gradient(circle, rgba(155, 142, 196, 0.2), transparent 70%);
+    animation-delay: -12s;
+  }
+
+  .ambient-light-orb-d {
+    width: 28vw;
+    height: 28vw;
+    bottom: 18%;
+    left: 15%;
+    background: radial-gradient(circle, rgba(110, 181, 168, 0.22), transparent 70%);
+    animation: ambient-float 24s ease-in-out infinite reverse;
+    animation-delay: -4s;
+  }
+
+  .carousel-flashcard-inner {
+    min-height: 320px;
+    border-radius: 1.25rem;
+    background: #ffffff;
+    border: 1px solid var(--theme-border-strong);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 1) inset,
+      0 16px 40px rgba(44, 62, 54, 0.12);
+  }
+
+  .carousel-flashcard-active .carousel-flashcard-inner {
+    border-color: color-mix(in srgb, var(--card-accent) 50%, var(--theme-border));
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 1) inset,
+      0 16px 40px color-mix(in srgb, var(--card-accent) 15%, transparent);
+    animation: card-glow-pulse 4s ease-in-out infinite;
+  }
+
+  .carousel-side-arrow {
+    @apply inline-flex min-h-[48px] min-w-[48px] items-center justify-center rounded-full border transition-[background,border-color,box-shadow] duration-300;
+    border-color: var(--theme-border);
+    background: var(--theme-surface);
+    color: var(--theme-ink);
+    box-shadow: 0 4px 14px rgba(44, 62, 54, 0.08);
+  }
+
+  .carousel-side-arrow:hover {
+    background: var(--theme-surface-muted);
+    border-color: var(--theme-border-strong);
+    box-shadow: 0 6px 20px rgba(91, 138, 114, 0.15);
+  }
+
   .verse-container {
     @apply mx-auto w-full max-w-[90rem] px-4 sm:px-6 lg:px-10;
   }
@@ -86,7 +216,9 @@
   }
 
   .nav-dock {
-    @apply flex items-center gap-0.5 p-1 rounded-full border border-white/10 bg-navy-deep/50 backdrop-blur-xl shadow-groove;
+    @apply flex items-center gap-0.5 rounded-full p-1 shadow-sm backdrop-blur-xl;
+    border: 1px solid var(--theme-border);
+    background: rgba(255, 255, 255, 0.82);
   }
 
   .pill-link {
@@ -216,4 +348,52 @@
 @layer utilities {
   .text-balance { text-wrap: balance; }
   .gpu { transform: translateZ(0); will-change: transform; }
+}
+
+@keyframes ambient-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, -2%, 0) scale(1.05);
+  }
+}
+
+@keyframes ambient-gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes grid-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-48px, -24px, 0);
+  }
+}
+
+@keyframes particle-drift {
+  from {
+    background-position: 0 0, 0 0, 0 0, 0 0;
+  }
+  to {
+    background-position: 220px 180px, -140px 120px, 90px -160px, -200px 80px;
+  }
+}
+
+@keyframes card-glow-pulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.02);
+  }
 }
