@@ -79,10 +79,10 @@ export function Navbar() {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
 
         isHome
-          ? "border-b border-[var(--theme-border)] bg-[var(--theme-surface)]/85 shadow-sm backdrop-blur-xl"
+          ? "border-b border-[var(--theme-border)] bg-[var(--forest-deep)]/80 shadow-sm backdrop-blur-xl"
           : scrolled
-            ? "border-b border-[var(--theme-border)] bg-[var(--theme-surface)]/95 shadow-sm backdrop-blur-2xl"
-            : "border-b border-[var(--theme-border)] bg-[var(--theme-surface)]/70 backdrop-blur-md"
+            ? "border-b border-[var(--theme-border)] bg-[var(--forest-deep)]/95 shadow-sm backdrop-blur-2xl"
+            : "border-b border-[var(--theme-border)] bg-[var(--forest-deep)]/70 backdrop-blur-md"
 
       )}
 
@@ -204,7 +204,7 @@ export function Navbar() {
 
             exit={{ opacity: 0, height: 0 }}
 
-            className="lg:hidden overflow-hidden border-t border-slate-200 bg-white/95 backdrop-blur-2xl"
+            className="lg:hidden overflow-hidden border-t border-[var(--theme-border)] bg-[var(--forest-deep)]/95 backdrop-blur-2xl"
 
           >
 

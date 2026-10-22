@@ -27,7 +27,7 @@ export function Footer() {
   if (pathname === "/") return null;
 
   return (
-    <footer className="relative mt-auto border-t border-slate-200 bg-white/80">
+    <footer className="relative mt-auto border-t border-[var(--theme-border)] bg-[var(--forest-deep)]/90">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-cyan/40 to-transparent" />
       <div className="verse-container py-14 md:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">

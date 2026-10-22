@@ -15,7 +15,7 @@ export function Logo({ className, compact }: LogoProps) {
       <span className="font-display text-[0.65rem] sm:text-xs tracking-[0.35em] text-[var(--theme-muted)] uppercase leading-none">
         The
       </span>
-      <span className="font-display font-semibold text-sm sm:text-base tracking-[0.2em] text-[var(--theme-ink)] group-hover:opacity-80 transition-opacity leading-tight">
+      <span className="font-display font-semibold text-sm sm:text-base tracking-[0.2em] text-[var(--forest-mist)] group-hover:opacity-80 transition-opacity leading-tight">
         VERSE TRIBE
       </span>
       {!compact && (

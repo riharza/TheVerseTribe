@@ -10,8 +10,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", size = "md", children, ...props }, ref) => {
     const variants = {
       primary:
-        "bg-[var(--theme-primary)] text-white font-medium shadow-md border border-[var(--theme-primary-hover)] " +
-        "hover:bg-[var(--theme-primary-hover)] hover:shadow-lg",
+        "bg-[var(--forest-sand)] text-[var(--forest-chestnut)] font-medium shadow-md border border-[var(--forest-terracotta)]/35 " +
+        "hover:bg-[var(--forest-mist)] hover:text-[var(--forest-void)] hover:shadow-lg",
       secondary:
         "bg-navy-mid/50 text-ivory hover:bg-navy-light/50 border border-white/12 backdrop-blur-md",
       ghost: "text-ivory-muted hover:text-accent-cyan hover:bg-accent-cyan/5",
