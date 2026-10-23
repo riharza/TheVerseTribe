@@ -10,7 +10,7 @@ export default async function DocsPage() {
   const health = await fetchHealth();
 
   return (
-    <div className="verse-container py-8 md:py-12 pt-24 md:pt-28 max-w-3xl">
+    <div className="verse-container max-w-3xl py-6 pb-10 pt-[max(5.5rem,env(safe-area-inset-top))] sm:py-8 md:py-12 md:pt-28">
       <SectionHeader
         eyebrow="Documentation"
         title="Platform documentation"

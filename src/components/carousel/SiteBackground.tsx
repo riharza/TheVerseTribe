@@ -17,7 +17,7 @@ export function SiteBackground() {
       />
 
       <svg
-        className="forest-leaf forest-leaf-a absolute -left-[8%] top-[6%] h-[38vh] w-[45vw] opacity-35"
+        className="forest-leaf forest-leaf-a absolute -left-[12%] top-[6%] h-[28vh] w-[55vw] opacity-25 sm:-left-[8%] sm:h-[38vh] sm:w-[45vw] sm:opacity-35"
         viewBox="0 0 200 280"
         fill="none"
         aria-hidden
@@ -30,7 +30,7 @@ export function SiteBackground() {
         <path d="M100 40 L100 240" stroke="rgba(218,241,222,0.15)" strokeWidth="2" />
       </svg>
       <svg
-        className="forest-leaf forest-leaf-b absolute -right-[5%] top-[12%] h-[32vh] w-[40vw] rotate-12 opacity-25"
+        className="forest-leaf forest-leaf-b absolute -right-[8%] top-[10%] h-[24vh] w-[48vw] rotate-12 opacity-20 sm:-right-[5%] sm:top-[12%] sm:h-[32vh] sm:w-[40vw] sm:opacity-25"
         viewBox="0 0 200 280"
         fill="none"
         aria-hidden
@@ -42,7 +42,7 @@ export function SiteBackground() {
         />
       </svg>
       <svg
-        className="forest-leaf forest-leaf-c absolute bottom-[8%] left-[20%] h-[28vh] w-[35vw] -rotate-45 opacity-20"
+        className="forest-leaf forest-leaf-c absolute bottom-[6%] left-[10%] hidden h-[22vh] w-[40vw] -rotate-45 opacity-15 sm:block sm:bottom-[8%] sm:left-[20%] sm:h-[28vh] sm:w-[35vw] sm:opacity-20"
         viewBox="0 0 200 280"
         fill="none"
         aria-hidden

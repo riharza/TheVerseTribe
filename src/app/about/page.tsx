@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="verse-container py-8 md:py-12 pt-24 md:pt-28">
+    <div className="verse-container py-6 pb-10 pt-[max(5.5rem,env(safe-area-inset-top))] sm:py-8 md:py-12 md:pt-28">
       <SectionHeader
         eyebrow="About"
         title="The Verse Tribe"

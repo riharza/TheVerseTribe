@@ -40,13 +40,13 @@ export function FeatureFlashcard({
       <div
         className={cn(
           "carousel-flashcard-inner flex h-full flex-col items-center text-center",
-          active ? "justify-center p-7 sm:p-9" : "p-6 sm:p-7"
+          active ? "justify-center p-5 sm:p-7 md:p-9" : "p-5 sm:p-7"
         )}
       >
         <div
           className={cn(
             "flashcard-symbol-ring mb-5 flex items-center justify-center rounded-full",
-            active ? "h-24 w-24 sm:h-[6.5rem] sm:w-[6.5rem]" : "h-20 w-20"
+            active ? "h-20 w-20 sm:h-24 sm:w-24 md:h-[6.5rem] md:w-[6.5rem]" : "h-20 w-20"
           )}
         >
           <Icon

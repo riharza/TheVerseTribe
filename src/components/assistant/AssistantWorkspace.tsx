@@ -93,8 +93,8 @@ export function AssistantWorkspace() {
           </ul>
         </aside>
 
-        <div className="flex flex-col min-h-[480px] verse-panel groove-panel overflow-hidden">
-          <div className="flex-1 p-4 md:p-6 space-y-4 overflow-y-auto max-h-[520px]" aria-live="polite">
+        <div className="flex min-h-[360px] flex-col verse-panel groove-panel overflow-hidden sm:min-h-[480px]">
+          <div className="max-h-[min(52vh,520px)] flex-1 space-y-4 overflow-y-auto p-4 md:max-h-[520px] md:p-6" aria-live="polite">
             {messages.length === 0 && (
               <p className="text-sm text-ivory-dim font-sans">
                 Ask about methods, retrieval, or comparisons. Select papers for grounded sample excerpts.
@@ -106,8 +106,8 @@ export function AssistantWorkspace() {
                 className={cn(
                   "rounded-xl p-4 border",
                   msg.role === "user"
-                    ? "bg-accent-violet/10 border-accent-violet/20 ml-8"
-                    : "bg-white/[0.03] border-white/10 mr-8"
+                    ? "ml-0 border-accent-violet/20 bg-accent-violet/10 sm:ml-8"
+                    : "mr-0 border-white/10 bg-white/[0.03] sm:mr-8"
                 )}
               >
                 <p className="text-sm font-sans text-ivory whitespace-pre-wrap">{msg.content}</p>

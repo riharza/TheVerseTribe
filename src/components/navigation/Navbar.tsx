@@ -172,7 +172,7 @@ export function Navbar() {
 
               onClick={() => setMobileOpen(!mobileOpen)}
 
-              className="lg:hidden flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-slate-200 p-3 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              className="lg:hidden flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-[var(--theme-border)] p-3 text-[var(--theme-body)] hover:bg-[var(--theme-surface-muted)] hover:text-[var(--theme-ink)]"
 
               aria-expanded={mobileOpen}
 
@@ -224,9 +224,9 @@ export function Navbar() {
 
                     (href === "/" ? pathname === "/" : pathname.startsWith(href))
 
-                      ? "border border-slate-200 bg-slate-100 text-slate-900"
+                      ? "border border-[var(--theme-border-strong)] bg-[var(--theme-surface-muted)] text-[var(--theme-ink)]"
 
-                      : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                      : "text-[var(--theme-body)] hover:bg-[var(--forest-mid)]/40 hover:text-[var(--theme-ink)]"
 
                   )}
 

@@ -25,7 +25,7 @@ export function HomeSiteIntro() {
       <p className="mb-3 font-sans text-xs uppercase tracking-[0.28em] text-[var(--theme-muted)] sm:text-[13px]">
         Research · AI
       </p>
-      <h1 className="font-display text-4xl font-semibold tracking-tight text-[var(--theme-ink)] sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
+      <h1 className="font-display text-[clamp(1.875rem,7vw,2.75rem)] font-semibold leading-tight tracking-tight text-[var(--theme-ink)] sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
         The Verse Tribe
       </h1>
       <p className="mt-4 font-sans text-base leading-relaxed text-[var(--theme-body)] sm:text-lg sm:leading-relaxed">

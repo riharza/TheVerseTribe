@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Serif, JetBrains_Mono } from "next/font/google";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -27,6 +27,12 @@ const jetbrains = JetBrains_Mono({
   weight: ["400", "500"],
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export const metadata: Metadata = {
   title: {
     default: "The Verse Tribe — Research Software & AI Platform",
@@ -42,11 +48,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${plexSans.variable} ${plexSerif.variable} ${jetbrains.variable}`}
     >
-      <body className="flex min-h-screen flex-col bg-[var(--background)] text-[var(--foreground)]">
+      <body className="flex min-h-screen flex-col overflow-x-clip bg-[var(--background)] text-[var(--foreground)]">
         <AppProviders>
           <SiteBackground />
           <Navbar />
-          <main className="relative z-10 flex-1">{children}</main>
+          <main className="relative z-10 min-w-0 flex-1 overflow-x-clip">{children}</main>
           <Footer />
         </AppProviders>
       </body>

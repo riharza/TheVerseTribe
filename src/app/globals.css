@@ -251,6 +251,27 @@
     translate: calc(100% + 0.625rem) -50%;
   }
 
+  @media (max-width: 639px) {
+    .carousel-flashcard-inner {
+      min-height: 280px;
+    }
+
+    .carousel-side-arrow {
+      min-height: 40px;
+      min-width: 40px;
+    }
+
+    .carousel-flashcard-nav-prev {
+      left: 0.25rem;
+      translate: 0 -50%;
+    }
+
+    .carousel-flashcard-nav-next {
+      right: 0.25rem;
+      translate: 0 -50%;
+    }
+  }
+
   .verse-container {
     @apply mx-auto w-full max-w-[90rem] px-4 sm:px-6 lg:px-10;
   }

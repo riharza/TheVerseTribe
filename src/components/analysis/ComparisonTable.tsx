@@ -38,8 +38,9 @@ export function ComparisonTable({ rows }: { rows: AnalysisComparisonRow[] }) {
           <span className="ml-3 text-xs text-accent-cyan self-center font-sans">Downloaded</span>
         )}
       </div>
-      <div className="overflow-x-auto rounded-xl border border-white/10">
-        <table className="w-full text-left text-sm font-sans min-w-[800px]">
+      <p className="text-xs font-sans text-ivory-dim md:hidden">Swipe horizontally to see all columns.</p>
+      <div className="overflow-x-auto rounded-xl border border-white/10 [-webkit-overflow-scrolling:touch]">
+        <table className="w-full min-w-[720px] text-left text-sm font-sans">
           <thead>
             <tr className="bg-white/[0.04] text-ivory-muted text-xs uppercase tracking-wider">
               <th className="p-3 font-medium">Paper</th>
