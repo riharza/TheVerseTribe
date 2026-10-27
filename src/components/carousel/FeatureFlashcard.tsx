@@ -27,7 +27,7 @@ export function FeatureFlashcard({
   return (
     <article
       className={cn(
-        "carousel-flashcard w-full transition-[filter,opacity,transform] duration-[950ms] ease-out",
+        "carousel-flashcard w-full",
         active ? "carousel-flashcard-active" : "carousel-flashcard-side"
       )}
       style={

@@ -49,15 +49,21 @@ export function Navbar() {
 
 
   useEffect(() => {
-
-    const onScroll = () => setScrolled(window.scrollY > 32);
-
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = window.requestAnimationFrame(() => {
+        raf = 0;
+        const next = window.scrollY > 32;
+        setScrolled((prev) => (prev === next ? prev : next));
+      });
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
-
     onScroll();
-
-    return () => window.removeEventListener("scroll", onScroll);
-
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
   }, []);
 
 
@@ -198,13 +204,15 @@ export function Navbar() {
 
           <motion.nav
 
-            initial={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0 }}
 
-            animate={{ opacity: 1, height: "auto" }}
+            animate={{ opacity: 1 }}
 
-            exit={{ opacity: 0, height: 0 }}
+            exit={{ opacity: 0 }}
 
-            className="lg:hidden overflow-hidden border-t border-[var(--theme-border)] bg-[var(--forest-deep)]/95 backdrop-blur-2xl"
+            transition={{ duration: 0.2 }}
+
+            className="lg:hidden border-t border-[var(--theme-border)] bg-[var(--forest-deep)]/95"
 
           >
 

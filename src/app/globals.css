@@ -57,6 +57,9 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+    .carousel-sliding-track {
+      will-change: auto;
+    }
   }
 
   body {
@@ -180,6 +183,7 @@
   }
 
   .carousel-viewport {
+    contain: layout paint;
     mask-image: linear-gradient(
       to right,
       transparent 0%,
@@ -191,6 +195,23 @@
 
   .carousel-sliding-track {
     padding-block: 0.25rem;
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  .home-intro-enter {
+    animation: home-intro-rise 0.5s ease-out both;
+  }
+
+  @keyframes home-intro-rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @media (max-width: 640px) {
@@ -249,6 +270,35 @@
     right: 0;
     left: auto;
     translate: calc(100% + 0.625rem) -50%;
+  }
+
+  @media (max-width: 768px) {
+    .site-backdrop .forest-canopy-glow,
+    .site-backdrop .forest-vein-texture,
+    .site-backdrop .site-backdrop-particles,
+    .site-backdrop .forest-leaf-a,
+    .site-backdrop .forest-leaf-b,
+    .site-backdrop .forest-leaf-c {
+      animation: none !important;
+    }
+
+    .carousel-flashcard-side .carousel-flashcard-inner {
+      filter: none;
+    }
+
+    .carousel-flashcard-active .carousel-flashcard-inner {
+      animation: none;
+    }
+
+    .verse-panel,
+    .glass-tile,
+    .nav-dock {
+      backdrop-filter: none;
+    }
+
+    .carousel-viewport {
+      mask-image: none;
+    }
   }
 
   @media (max-width: 639px) {

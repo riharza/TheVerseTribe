@@ -31,7 +31,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          "inline-flex items-center justify-center gap-2 font-sans transition-all duration-300",
+          "inline-flex touch-manipulation items-center justify-center gap-2 font-sans transition-all duration-300",
           "disabled:opacity-50 disabled:pointer-events-none",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white",
           "hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]",

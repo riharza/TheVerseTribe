@@ -10,6 +10,7 @@ import {
 } from "@/components/carousel/carousel-cards";
 import { FeatureFlashcard } from "@/components/carousel/FeatureFlashcard";
 import { HomeSiteIntro } from "@/components/carousel/HomeSiteIntro";
+import { usePrefersReducedMotion } from "@/lib/motion/use-prefers-reduced-motion";
 import { cn } from "@/lib/utils";
 
 const cards = buildFeatureCards();
@@ -19,6 +20,7 @@ const CARD_WIDTH_MAX = 320;
 const CARD_WIDTH_MIN = 252;
 const CARD_GAP = 18;
 const VIEWPORT_MAX = 860;
+const SWIPE_THRESHOLD_PX = 48;
 
 function getCardWidth(viewportWidth: number) {
   const peekReserve = viewportWidth < 640 ? 72 : 96;
@@ -49,48 +51,87 @@ function measureLayout(activeIndex: number, viewportEl: HTMLDivElement | null): 
 }
 
 export function HorizontalFeatureCarousel() {
+  const reducedMotion = usePrefersReducedMotion();
   const [index, setIndex] = useState(0);
+  const indexRef = useRef(0);
   const [activeColors, setActiveColors] = useState<ActiveCardColors>(() => randomActiveCardColors());
   const [layout, setLayout] = useState<CarouselLayout>(() => ({
     viewportWidth: 360,
     cardWidth: CARD_WIDTH_MAX,
     trackX: 0,
   }));
+  const [animateSlide, setAnimateSlide] = useState(false);
   const viewportRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
 
-  const syncTrack = useCallback((activeIndex: number) => {
-    setLayout(measureLayout(activeIndex, viewportRef.current));
-  }, []);
+  indexRef.current = index;
 
-  const selectIndex = useCallback((next: number) => {
-    setActiveColors(randomActiveCardColors());
-    setIndex(next);
-  }, []);
-
-  const go = useCallback((delta: number) => {
-    setIndex((i) => (i + delta + cards.length * 8) % cards.length);
-    setActiveColors(randomActiveCardColors());
-  }, []);
+  const go = useCallback(
+    (delta: number) => {
+      setAnimateSlide(!reducedMotion);
+      setActiveColors(randomActiveCardColors());
+      setIndex((i) => (i + delta + cards.length * 8) % cards.length);
+    },
+    [reducedMotion]
+  );
 
   const jumpTo = useCallback(
     (next: number) => {
       if (next === index) return;
-      selectIndex(next);
+      setAnimateSlide(!reducedMotion);
+      setActiveColors(randomActiveCardColors());
+      setIndex(next);
     },
-    [index, selectIndex]
+    [index, reducedMotion]
   );
 
   useLayoutEffect(() => {
-    syncTrack(index);
-  }, [index, syncTrack]);
+    setLayout(measureLayout(index, viewportRef.current));
+  }, [index]);
 
   useEffect(() => {
     const node = viewportRef.current;
     if (!node) return;
-    const ro = new ResizeObserver(() => syncTrack(index));
+
+    let debounceId: ReturnType<typeof setTimeout> | undefined;
+    const ro = new ResizeObserver(() => {
+      clearTimeout(debounceId);
+      debounceId = setTimeout(() => {
+        setAnimateSlide(false);
+        setLayout(measureLayout(indexRef.current, viewportRef.current));
+      }, 120);
+    });
     ro.observe(node);
-    return () => ro.disconnect();
-  }, [index, syncTrack]);
+    return () => {
+      ro.disconnect();
+      clearTimeout(debounceId);
+    };
+  }, []);
+
+  useEffect(() => {
+    const node = viewportRef.current;
+    if (!node) return;
+
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.touches[0]?.clientX ?? null;
+    };
+    const onTouchEnd = (e: TouchEvent) => {
+      const start = touchStartX.current;
+      touchStartX.current = null;
+      if (start == null) return;
+      const endX = e.changedTouches[0]?.clientX ?? start;
+      const delta = endX - start;
+      if (Math.abs(delta) < SWIPE_THRESHOLD_PX) return;
+      go(delta > 0 ? -1 : 1);
+    };
+
+    node.addEventListener("touchstart", onTouchStart, { passive: true });
+    node.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      node.removeEventListener("touchstart", onTouchStart);
+      node.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [go]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -102,6 +143,7 @@ export function HorizontalFeatureCarousel() {
   }, [go]);
 
   const { cardWidth, trackX } = layout;
+  const slideDuration = animateSlide && !reducedMotion ? SLIDE_DURATION_S : 0;
 
   return (
     <div className="horizontal-carousel-shell relative flex min-h-[calc(100dvh-4rem)] flex-col justify-center px-3 pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-[max(5rem,env(safe-area-inset-top))] sm:px-4 lg:px-8 lg:pt-24">
@@ -115,13 +157,13 @@ export function HorizontalFeatureCarousel() {
           >
             <div
               ref={viewportRef}
-              className="carousel-viewport relative mx-auto min-h-[300px] w-full max-w-[860px] shrink-0 overflow-hidden sm:min-h-[340px]"
+              className="carousel-viewport relative mx-auto min-h-[300px] w-full max-w-[860px] shrink-0 overflow-hidden touch-pan-y sm:min-h-[340px]"
             >
               <motion.div
-                className="carousel-sliding-track flex items-stretch will-change-transform"
+                className="carousel-sliding-track flex items-stretch"
                 style={{ gap: CARD_GAP }}
                 animate={{ x: trackX }}
-                transition={{ duration: SLIDE_DURATION_S, ease: slideEase }}
+                transition={{ duration: slideDuration, ease: slideEase }}
               >
                 {cards.map((card, i) => {
                   const isActive = i === index;
@@ -147,36 +189,27 @@ export function HorizontalFeatureCarousel() {
                 className="carousel-flashcard-nav-rail pointer-events-none absolute inset-y-0 left-1/2 z-20 -translate-x-1/2"
                 style={{ width: cardWidth }}
               >
-                <motion.button
+                <button
                   type="button"
                   onClick={() => go(-1)}
                   className="carousel-side-arrow carousel-flashcard-nav carousel-flashcard-nav-prev pointer-events-auto"
                   aria-label="Previous module"
-                  whileHover={{ scale: 1.06 }}
-                  whileTap={{ scale: 0.94 }}
                 >
                   <ChevronLeft className="h-5 w-5" />
-                </motion.button>
-                <motion.button
+                </button>
+                <button
                   type="button"
                   onClick={() => go(1)}
                   className="carousel-side-arrow carousel-flashcard-nav carousel-flashcard-nav-next pointer-events-auto"
                   aria-label="Next module"
-                  whileHover={{ scale: 1.06 }}
-                  whileTap={{ scale: 0.94 }}
                 >
                   <ChevronRight className="h-5 w-5" />
-                </motion.button>
+                </button>
               </div>
             </div>
           </div>
 
-          <motion.div
-            className="mt-4 flex flex-col items-center gap-2 sm:mt-5"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.35, duration: 0.4 }}
-          >
+          <div className="mt-4 flex flex-col items-center gap-2 sm:mt-5">
             <p className="font-sans text-xs uppercase tracking-wider text-[var(--theme-muted)]">
               {index + 1} / {cards.length}
             </p>
@@ -197,7 +230,7 @@ export function HorizontalFeatureCarousel() {
                 />
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
 
         <div className="order-2 min-w-0 lg:order-1">
